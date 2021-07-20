@@ -2,4 +2,4 @@
 
 ## Наборы данных
 
-[FUNSD (Форма понимания в зашумленных отсканированных документах)](https://paperswithcode.com/dataset/funsd)
+[FUNSD (Форма понимания в зашумленных отсканированных документах)](https://guillaumejaume.github.io/FUNSD/index.html)
