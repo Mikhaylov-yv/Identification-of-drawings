@@ -13,4 +13,6 @@ def test_init():
 def test_train(test_init):
     tr = test_init
     tr.train()
-    print(tr.train_df)
+    tr.epochs = 1
+    print(tr.train_df[tr.train_filtr])
+    print(tr.model)
