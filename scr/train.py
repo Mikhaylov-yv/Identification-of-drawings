@@ -27,7 +27,7 @@ class Train:
         self.epochs = 6
 
     def train(self):
-        self.train_df = self.get_annotation()
+        self.train_df = self.get_annotation(self.data_path_train)
         self.train_filtr = self.__filtr(self.train_df)
         train_df = self.train_df[self.train_filtr]
         train_data, train_targets, train_filenames = self.get_img_data(train_df, self.data_path_train)
@@ -86,8 +86,8 @@ class Train:
         return (data, targets, filenames)
 
 
-    def get_annotation(self):
-        annotations_path = self.data_path_train + '/annotations'
+    def get_annotation(self, data_path, filtr = False):
+        annotations_path = data_path + '/annotations'
         df = pd.DataFrame()
         for fill_name in os.listdir(annotations_path):
             path = f"{annotations_path}/{fill_name}"
@@ -97,7 +97,9 @@ class Train:
             info_df = pd.json_normalize(data['form'])
             info_df['fil_name'] = name
             df = df.append(info_df)
-        return df
+
+        if filtr == False: return df
+        return df[self.__filtr(df)]
 
     def __filtr(self, df):
         return (df.label == 'other')&(df.text.str.contains('(^\d{5,10})|(\d{5,10}$)'))
